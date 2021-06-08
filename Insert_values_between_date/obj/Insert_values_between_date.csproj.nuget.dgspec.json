@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\demidov\\Documents\\1\\source\\repos\\Insert_values_between_date\\Insert_values_between_date\\Insert_values_between_date.csproj": {}
+    "C:\\Users\\demidov\\Documents\\GitHub\\CsvFilesParser\\Insert_values_between_date\\Insert_values_between_date.csproj": {}
   },
   "projects": {
-    "C:\\Users\\demidov\\Documents\\1\\source\\repos\\Insert_values_between_date\\Insert_values_between_date\\Insert_values_between_date.csproj": {
+    "C:\\Users\\demidov\\Documents\\GitHub\\CsvFilesParser\\Insert_values_between_date\\Insert_values_between_date.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\demidov\\Documents\\1\\source\\repos\\Insert_values_between_date\\Insert_values_between_date\\Insert_values_between_date.csproj",
+        "projectUniqueName": "C:\\Users\\demidov\\Documents\\GitHub\\CsvFilesParser\\Insert_values_between_date\\Insert_values_between_date.csproj",
         "projectName": "Insert_values_between_date",
-        "projectPath": "C:\\Users\\demidov\\Documents\\1\\source\\repos\\Insert_values_between_date\\Insert_values_between_date\\Insert_values_between_date.csproj",
+        "projectPath": "C:\\Users\\demidov\\Documents\\GitHub\\CsvFilesParser\\Insert_values_between_date\\Insert_values_between_date.csproj",
         "packagesPath": "C:\\Users\\demidov\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\demidov\\Documents\\1\\source\\repos\\Insert_values_between_date\\Insert_values_between_date\\obj\\",
+        "outputPath": "C:\\Users\\demidov\\Documents\\GitHub\\CsvFilesParser\\Insert_values_between_date\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Progress\\ToolboxNuGetPackages"
