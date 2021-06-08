@@ -32,7 +32,9 @@ namespace Insert_values_between_date.Models
                 c2h2 + delimiter +
                 co2 + delimiter +
                 n2 + delimiter +
-                Toil;
+                Humidity + delimiter +
+                Moisture + delimiter +
+                OilTemp;
         }
     }
 }

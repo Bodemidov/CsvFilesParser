@@ -17,7 +17,7 @@ namespace Insert_values_between_date
             var rf = new ReadFile();
             var uti = new Utitlities();
 
-            var gases = rf.GetGases(@"D:\work\7x.csv");
+            var gases = rf.GetGasesV2(@"D:\work\7x.csv");
             var powers = rf.GetPowers(@"D:\work\atx1.csv");
 
             var filledData = new Powers();
@@ -38,16 +38,18 @@ namespace Insert_values_between_date
                 filledData.i_pb = powers.Where(p => correctDates[counter] == p.datetime).Select(x => x.i_pb).First();
                 filledData.i_pc = powers.Where(p => correctDates[counter] == p.datetime).Select(x => x.i_pc).First();
 
-                filledData.h2 = li.Linear(2, 1, 3, Convert.ToDouble(aboveGas.h2.Replace(".",",")), Convert.ToDouble(beloveGas.h2.Replace(".", ","))).ToString(); 
-                filledData.o2 = li.Linear(2, 1, 3, Convert.ToDouble(aboveGas.o2.Replace(".", ",")), Convert.ToDouble(beloveGas.o2.Replace(".", ","))).ToString(); 
-                filledData.ch4 = li.Linear(2, 1, 3, Convert.ToDouble(aboveGas.ch4.Replace(".", ",")), Convert.ToDouble(beloveGas.ch4.Replace(".", ","))).ToString(); 
-                filledData.co = li.Linear(2, 1, 3, Convert.ToDouble(aboveGas.co.Replace(".", ",")), Convert.ToDouble(beloveGas.co.Replace(".", ","))).ToString(); 
-                filledData.c2h4 = li.Linear(2, 1, 3, Convert.ToDouble(aboveGas.c2h4.Replace(".", ",")), Convert.ToDouble(beloveGas.c2h4.Replace(".", ","))).ToString(); 
-                filledData.c2h6 = li.Linear(2, 1, 3, Convert.ToDouble(aboveGas.c2h6.Replace(".", ",")), Convert.ToDouble(beloveGas.c2h6.Replace(".", ","))).ToString(); 
-                filledData.c2h2 = li.Linear(2, 1, 3, Convert.ToDouble(aboveGas.c2h2.Replace(".", ",")), Convert.ToDouble(beloveGas.c2h2.Replace(".", ","))).ToString(); 
-                filledData.co2 = li.Linear(2, 1, 3, Convert.ToDouble(aboveGas.co2.Replace(".", ",")), Convert.ToDouble(beloveGas.co2.Replace(".", ","))).ToString(); 
-                filledData.n2 = li.Linear(2, 1, 3, Convert.ToDouble(aboveGas.n2.Replace(".", ",")), Convert.ToDouble(beloveGas.n2.Replace(".", ","))).ToString(); 
-                filledData.Toil = li.Linear(2, 1, 3, Convert.ToDouble(aboveGas.Toil.Replace(".", ",")), Convert.ToDouble(beloveGas.Toil.Replace(".", ","))).ToString();
+                filledData.h2 = li.Linear(2, 1, 3, aboveGas.h2, beloveGas.h2).ToString(); 
+                filledData.o2 = li.Linear(2, 1, 3, aboveGas.o2, beloveGas.o2).ToString(); 
+                filledData.ch4 = li.Linear(2, 1, 3, aboveGas.ch4, beloveGas.ch4).ToString(); 
+                filledData.co = li.Linear(2, 1, 3, aboveGas.co, beloveGas.co).ToString(); 
+                filledData.c2h4 = li.Linear(2, 1, 3, aboveGas.c2h4, beloveGas.c2h4).ToString(); 
+                filledData.c2h6 = li.Linear(2, 1, 3, aboveGas.c2h6, beloveGas.c2h6).ToString(); 
+                filledData.c2h2 = li.Linear(2, 1, 3, aboveGas.c2h2, beloveGas.c2h2).ToString(); 
+                filledData.co2 = li.Linear(2, 1, 3, aboveGas.co2, beloveGas.co2).ToString(); 
+                filledData.n2 = li.Linear(2, 1, 3, aboveGas.n2, beloveGas.n2).ToString(); 
+                filledData.Humidity = li.Linear(2, 1, 3, aboveGas.Humidity, beloveGas.Humidity).ToString();
+                filledData.Moisture = li.Linear(2, 1, 3, aboveGas.Moisture, beloveGas.Moisture).ToString();
+                filledData.OilTemp = li.Linear(2, 1, 3, aboveGas.OilTemp, beloveGas.OilTemp).ToString();
 
                 wtf.WriteByLine(filledData.ToString().Replace(",","."));
                 Console.WriteLine(filledData.ToString());

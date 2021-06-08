@@ -17,6 +17,9 @@ namespace Insert_values_between_date.Models
         public string co2;
         public string n2;
         public string Toil;
+        public string Humidity;
+        public string Moisture;
+        public string OilTemp;
 
         protected string delimiter = ";";
     }
