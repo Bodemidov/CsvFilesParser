@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v3.1",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v3.1": {
+      "Insert_values_between_date/1.0.0": {
+        "runtime": {
+          "Insert_values_between_date.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Insert_values_between_date/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
