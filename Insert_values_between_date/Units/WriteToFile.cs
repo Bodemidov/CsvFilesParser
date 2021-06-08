@@ -12,5 +12,10 @@ namespace Insert_values_between_date.Units
 
             File.AppendAllText(@"c:\work\file.txt", text + Environment.NewLine);
         }
+
+        public void WriteByLine(string str1)
+        {
+            File.AppendAllText(@"d:\work\file.csv", str1 + Environment.NewLine);
+        }
     }
 }
