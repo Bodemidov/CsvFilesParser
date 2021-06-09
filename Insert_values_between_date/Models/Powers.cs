@@ -15,14 +15,15 @@ namespace Insert_values_between_date.Models
 
         public override string ToString()
         {
-            return 
-                datetime + delimiter + 
-                p + delimiter + 
-                s + delimiter + 
-                i_pa + delimiter + 
+            return
+                datetime + delimiter +
+                p + delimiter +
+                q + delimiter +
+                s + delimiter +
+                i_pa + delimiter +
                 i_pb + delimiter +
                 i_pc + delimiter +
-                
+
                 h2 + delimiter +
                 o2 + delimiter +
                 ch4 + delimiter +
@@ -35,6 +36,7 @@ namespace Insert_values_between_date.Models
                 Humidity + delimiter +
                 Moisture + delimiter +
                 OilTemp;
+                //Toil;
         }
     }
 }
