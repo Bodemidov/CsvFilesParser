@@ -8,7 +8,7 @@ namespace Insert_values_between_date.Units
 {
     class ReadFile
     {
-        public List<TempDateTime> GetPersons(string filepath)
+        public List<TempDateTime> GetValueWithData(string filepath)
         {
             var dictionaryTest = new List<TempDateTime>();
 
@@ -98,9 +98,9 @@ namespace Insert_values_between_date.Units
             return dictionaryTest;
         }
 
-        public List<Powers> GetPowers(string filepath)
+        public List<GeneralParams> GetPowers(string filepath)
         {
-            var dictionaryTest = new List<Powers>();
+            var dictionaryTest = new List<GeneralParams>();
 
             using (var reader = new StreamReader(filepath))
             {
@@ -110,15 +110,15 @@ namespace Insert_values_between_date.Units
                     var line = reader.ReadLine();
                     var values = line.Split(';');
 
-                    dictionaryTest.Add(new Powers
+                    dictionaryTest.Add(new GeneralParams
                     {
                         datetime = DateTime.Parse(values[0]),
-                        p = values[1],
-                        q = values[2],
-                        s = values[3],
-                        i_pa = values[4],
-                        i_pb = values[5],
-                        i_pc = values[6],
+                        Pa_HV = values[1],
+                        Qa_HV = values[2],
+                        Sa_HV = values[3],
+                        Ia_HV = values[4],
+                        Ib_HV = values[5],
+                        Ic_HV = values[6],
                     });
                 }
 

@@ -17,10 +17,16 @@ namespace Insert_values_between_date
             var rf = new ReadFile();
             var uti = new Utitlities();
 
-            var gases = rf.GetGasesV2(@"D:\work\7x.csv");
+
+
+
+
+
+
+            var gases = rf.GetGases(@"D:\work\7x.csv");
             var powers = rf.GetPowers(@"D:\work\atx1.csv");
 
-            var filledData = new Powers();
+            var filledData = new GeneralParams();
 
             var correctDates = uti.GetDateTimeFourPace(powers.Select(p => p.datetime).ToList());
 
@@ -31,12 +37,12 @@ namespace Insert_values_between_date
                 var beloveGas = GetBeloveGas(gases, correctDates[counter]);
 
                 filledData.datetime = correctDates[counter];
-                filledData.p = powers.Where(p => correctDates[counter] == p.datetime).Select(x => x.p).First();
-                filledData.q = powers.Where(q => correctDates[counter] == q.datetime).Select(x => x.q).First();
-                filledData.s = powers.Where(s => correctDates[counter] == s.datetime).Select(x => x.s).First();
-                filledData.i_pa = powers.Where(p => correctDates[counter] == p.datetime).Select(x => x.i_pa).First();
-                filledData.i_pb = powers.Where(p => correctDates[counter] == p.datetime).Select(x => x.i_pb).First();
-                filledData.i_pc = powers.Where(p => correctDates[counter] == p.datetime).Select(x => x.i_pc).First();
+                filledData.Pa_HV = powers.Where(p => correctDates[counter] == p.datetime).Select(x => x.Pa_HV).First();
+                filledData.Qa_HV = powers.Where(q => correctDates[counter] == q.datetime).Select(x => x.Qa_HV).First();
+                filledData.Sa_HV = powers.Where(s => correctDates[counter] == s.datetime).Select(x => x.Sa_HV).First();
+                filledData.Ia_HV = powers.Where(p => correctDates[counter] == p.datetime).Select(x => x.Ia_HV).First();
+                filledData.Ib_HV = powers.Where(p => correctDates[counter] == p.datetime).Select(x => x.Ib_HV).First();
+                filledData.Ic_HV = powers.Where(p => correctDates[counter] == p.datetime).Select(x => x.Ic_HV).First();
 
                 filledData.h2 = li.Linear(2, 1, 3, aboveGas.h2, beloveGas.h2).ToString(); 
                 filledData.o2 = li.Linear(2, 1, 3, aboveGas.o2, beloveGas.o2).ToString(); 
@@ -46,10 +52,12 @@ namespace Insert_values_between_date
                 filledData.c2h6 = li.Linear(2, 1, 3, aboveGas.c2h6, beloveGas.c2h6).ToString(); 
                 filledData.c2h2 = li.Linear(2, 1, 3, aboveGas.c2h2, beloveGas.c2h2).ToString(); 
                 filledData.co2 = li.Linear(2, 1, 3, aboveGas.co2, beloveGas.co2).ToString(); 
-                filledData.n2 = li.Linear(2, 1, 3, aboveGas.n2, beloveGas.n2).ToString(); 
-                filledData.Humidity = li.Linear(2, 1, 3, aboveGas.Humidity, beloveGas.Humidity).ToString();
+                filledData.n2 = li.Linear(2, 1, 3, aboveGas.n2, beloveGas.n2).ToString();
+                //filledData.Toil = li.Linear(2, 1, 3, aboveGas.Toil, beloveGas.Toil).ToString();
+
+                /*filledData.Humidity = li.Linear(2, 1, 3, aboveGas.Humidity, beloveGas.Humidity).ToString();
                 filledData.Moisture = li.Linear(2, 1, 3, aboveGas.Moisture, beloveGas.Moisture).ToString();
-                filledData.OilTemp = li.Linear(2, 1, 3, aboveGas.OilTemp, beloveGas.OilTemp).ToString();
+                filledData.OilTemp = li.Linear(2, 1, 3, aboveGas.OilTemp, beloveGas.OilTemp).ToString();*/
 
                 wtf.WriteByLine(filledData.ToString().Replace(",","."));
                 Console.WriteLine(filledData.ToString());
@@ -66,7 +74,7 @@ namespace Insert_values_between_date
                     .OrderBy(x => x.datetime)
                     .Take(8).ToList();
 
-                belowGas = gas.Where(p => p.datetime.Date == correctDate.AddDays(1)).First();
+                belowGas = tempGas.Where(p => p.datetime.Date == correctDate.AddDays(1)).First();
             }
 
             return belowGas;
@@ -80,9 +88,9 @@ namespace Insert_values_between_date
             {
                 var tempGas = gas.Where(p => p.datetime.Date <= correctDate.Date)
                     .OrderByDescending(x => x.datetime)
-                    .Take(8).ToList();
+                    .Take(16).ToList();
 
-                aboveGas = gas.Where(p => p.datetime.Date == correctDate.AddDays(-1)).First();
+                aboveGas = tempGas.Where(p => p.datetime.Date == correctDate.AddDays(-1)).First();
             }
 
             return aboveGas;
