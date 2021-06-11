@@ -19,13 +19,14 @@ namespace Insert_values_between_date
 
             //new file
             //var newPartData = rf.GetValueWithData(@"D:\work\conc.csv");
-            var newPartData = rf.GetGases(@"D:\work\conc.csv");
+            var newPartData = rf.GetGases(@"D:\work\file.csv");
 
             //dataset
             var dataSetMain = rf.GetGases(@"D:\work\file.csv");
 
             //var correctDatesnewPartData = uti.GetDateTimeFourPace(newPartData);
 
+            wtf.WriteByLine("datetime;h2;o2;CH4;CO;C2H4;C2H6;C2H2;CO2;N2;t_o_top_mes;t_o_bot_m;t_o_bot_m;Qa_HV;Sa_HV;Ia_HV;Ib_HV;Ic_HV;");
             for (int i = 0; i < dataSetMain.Count; i++)
             {
                 var aboveGas = GetAboveGas(newPartData, dataSetMain[i].datetime);
@@ -39,6 +40,15 @@ namespace Insert_values_between_date
                 dataSetMain[i].c2h6 = li.Linear(2, 1, 3, aboveGas.c2h6, beloveGas.c2h6).ToString();
                 dataSetMain[i].c2h2 = li.Linear(2, 1, 3, aboveGas.c2h2, beloveGas.c2h2).ToString();
                 dataSetMain[i].co2 = li.Linear(2, 1, 3, aboveGas.co2, beloveGas.co2).ToString();
+                dataSetMain[i].n2 = li.Linear(2, 1, 3, aboveGas.n2, beloveGas.n2).ToString();
+                dataSetMain[i].t_o_top_mes = li.Linear(2, 1, 3, aboveGas.t_o_top_mes, beloveGas.t_o_top_mes).ToString();
+                dataSetMain[i].t_o_bot_m = li.Linear(2, 1, 3, aboveGas.t_o_bot_m, beloveGas.t_o_bot_m).ToString();
+                dataSetMain[i].Pa_HV = li.Linear(2, 1, 3, aboveGas.Pa_HV, beloveGas.Pa_HV).ToString();
+                dataSetMain[i].Qa_HV = li.Linear(2, 1, 3, aboveGas.Qa_HV, beloveGas.Qa_HV).ToString();
+                dataSetMain[i].Sa_HV = li.Linear(2, 1, 3, aboveGas.Sa_HV, beloveGas.Sa_HV).ToString();
+                dataSetMain[i].Ia_HV = li.Linear(2, 1, 3, aboveGas.Ia_HV, beloveGas.Ia_HV).ToString();
+                dataSetMain[i].Ib_HV = li.Linear(2, 1, 3, aboveGas.Ib_HV, beloveGas.Ib_HV).ToString();
+                dataSetMain[i].Ic_HV = li.Linear(2, 1, 3, aboveGas.Ic_HV, beloveGas.Ic_HV).ToString();
             
                 wtf.WriteByLine(dataSetMain[i].ToString().Replace(",", "."));
                 Console.WriteLine(dataSetMain[i].ToString());
@@ -62,7 +72,12 @@ namespace Insert_values_between_date
 
                 aboveGas = tempGas.Where(p => p.datetime.Date == correctDate.Date.AddDays(-1)).FirstOrDefault();
             }
-
+            
+            if (aboveGas == null)
+            {
+                aboveGas = new GeneralParams();
+            }
+            
             return aboveGas;
         }
 

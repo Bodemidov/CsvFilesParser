@@ -11,6 +11,11 @@ namespace Insert_values_between_date.Units
             if (y1 == "")
                 y1 = "0";
 
+            if (y0 == null)
+                y0 = "0";
+            if (y1 == null)
+                y1 = "0";
+
             if ((x1 - x0) == 0)
             {
                 return (Convert.ToDouble(y0.Replace(".",",")) + Convert.ToDouble(y1.Replace(".", ","))) / 2;
