@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Insert_values_between_date.Models
 {
-    class Gases
+    public class Gases
     {
         public DateTime datetime;
         public string h2;

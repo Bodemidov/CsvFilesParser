@@ -1,0 +1,36 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v3.1",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v3.1": {
+      "CsvToSqlParser/1.0.0": {
+        "dependencies": {
+          "Insert_values_between_date": "1.0.0"
+        },
+        "runtime": {
+          "CsvToSqlParser.dll": {}
+        }
+      },
+      "Insert_values_between_date/1.0.0": {
+        "runtime": {
+          "Insert_values_between_date.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "CsvToSqlParser/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Insert_values_between_date/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

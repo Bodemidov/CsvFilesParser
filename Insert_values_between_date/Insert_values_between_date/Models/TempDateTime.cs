@@ -4,10 +4,12 @@ using System.Text;
 
 namespace Insert_values_between_date.Models
 {
-    class TempDateTime
+    public class TempDateTime
     {
-        public DateTime date;
-        public DateTime time;
+        public DateTime datetime;
+        //public DateTime time;
         public string tempValue;
+        public string tempValue1;
+        public string tempValue2;
     }
 }

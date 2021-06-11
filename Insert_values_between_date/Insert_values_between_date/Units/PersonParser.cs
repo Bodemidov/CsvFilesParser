@@ -5,15 +5,15 @@ using System.Text;
 
 namespace Insert_values_between_date.Units
 {
-    class PersonParser
+    public class PersonParser
     {
         public TempDateTime ParsePersonFromLine(string line)
         {
             var values = line.Split(',');
             return new TempDateTime
             {
-                date = DateTime.Parse(values[0]),
-                time = DateTime.Parse(values[0]),
+                datetime = DateTime.Parse(values[0]),
+                //time = DateTime.Parse(values[0]),
                 tempValue = values[1]
             };
         }

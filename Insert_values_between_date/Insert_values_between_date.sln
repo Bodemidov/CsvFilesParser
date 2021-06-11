@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31313.79
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Insert_values_between_date", "Insert_values_between_date\Insert_values_between_date.csproj", "{22A30286-DB11-4D0D-A46C-67CF22617BCF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Insert_values_between_date", "Insert_values_between_date\Insert_values_between_date.csproj", "{22A30286-DB11-4D0D-A46C-67CF22617BCF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CsvToSqlParser", "CsvToSqlParser\CsvToSqlParser.csproj", "{98D62D45-38E2-4869-8448-4EF0133805EF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{22A30286-DB11-4D0D-A46C-67CF22617BCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{22A30286-DB11-4D0D-A46C-67CF22617BCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{22A30286-DB11-4D0D-A46C-67CF22617BCF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{98D62D45-38E2-4869-8448-4EF0133805EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{98D62D45-38E2-4869-8448-4EF0133805EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{98D62D45-38E2-4869-8448-4EF0133805EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{98D62D45-38E2-4869-8448-4EF0133805EF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
