@@ -19,58 +19,29 @@ namespace Insert_values_between_date
 
             //new file
             //var newPartData = rf.GetValueWithData(@"D:\work\conc.csv");
-            //var newPartData = rf.GetGasesV2(@"D:\work\conc.csv");
+            var newPartData = rf.GetGases(@"D:\work\conc.csv");
 
             //dataset
             var dataSetMain = rf.GetGases(@"D:\work\file.csv");
-            var newDataSetMain = new List<GeneralParams>();
 
             //var correctDatesnewPartData = uti.GetDateTimeFourPace(newPartData);
 
-            var startDate = dataSetMain[0].datetime;
-            var lastDate = dataSetMain.OrderByDescending(x => x.datetime).First().datetime;
-            var hourCounter = 0;
-
-            while (startDate.Date != lastDate.Date)
+            for (int i = 0; i < dataSetMain.Count; i++)
             {
-                var tempData = dataSetMain.Where(c => c.datetime.Date == startDate.Date).ToList();
-                for (int i = 0; i < 6; i++)
-                {
-                    var temValue = tempData.Where(c => c.datetime.Hour == hourCounter).ToList();
-                    startDate = new DateTime(startDate.Year, startDate.Month, startDate.Day, hourCounter, 0, 0);
-                    newDataSetMain.Add(new GeneralParams
-                    {
-                        datetime = startDate,
-                        h2 = temValue.Where(x => x.datetime.Hour == hourCounter && x.h2 != "").Select(s => s.h2).FirstOrDefault(),
-                        o2 = temValue.Where(x => x.datetime.Hour == hourCounter && x.o2 != "").Select(s => s.o2).FirstOrDefault(),
-                        ch4 = temValue.Where(x => x.datetime.Hour == hourCounter && x.ch4 != "").Select(s => s.ch4).FirstOrDefault(),
-                        co = temValue.Where(x => x.datetime.Hour == hourCounter && x.co != "").Select(s => s.co).FirstOrDefault(),
-                        c2h4 = temValue.Where(x => x.datetime.Hour == hourCounter && x.c2h4 != "").Select(s => s.c2h4).FirstOrDefault(),
-                        c2h6 = temValue.Where(x => x.datetime.Hour == hourCounter && x.c2h6 != "").Select(s => s.c2h6).FirstOrDefault(),
-                        c2h2 = temValue.Where(x => x.datetime.Hour == hourCounter && x.c2h2 != "").Select(s => s.c2h2).FirstOrDefault(),
-                        co2 = temValue.Where(x => x.datetime.Hour == hourCounter && x.co2 != "").Select(s => s.co2).FirstOrDefault(),
-                        n2 = temValue.Where(x => x.datetime.Hour == hourCounter && x.n2 != "").Select(s => s.n2).FirstOrDefault(),
-                        t_o_top_mes = temValue.Where(x => x.datetime.Hour == hourCounter && x.t_o_top_mes != "").Select(s => s.t_o_top_mes).FirstOrDefault(),
-                        t_o_bot_m = temValue.Where(x => x.datetime.Hour == hourCounter && x.t_o_bot_m != "").Select(s => s.t_o_bot_m).FirstOrDefault(),
-                        Pa_HV = temValue.Where(x => x.datetime.Hour == hourCounter && x.Pa_HV != "").Select(s => s.Pa_HV).FirstOrDefault(),
-                        Qa_HV = temValue.Where(x => x.datetime.Hour == hourCounter && x.Qa_HV != "").Select(s => s.Qa_HV).FirstOrDefault(),
-                        Sa_HV = temValue.Where(x => x.datetime.Hour == hourCounter && x.Sa_HV != "").Select(s => s.Sa_HV).FirstOrDefault(),
-                        Ia_HV = temValue.Where(x => x.datetime.Hour == hourCounter && x.Ia_HV != "").Select(s => s.Ia_HV).FirstOrDefault(),
-                        Ib_HV = temValue.Where(x => x.datetime.Hour == hourCounter && x.Ib_HV != "").Select(s => s.Ib_HV).FirstOrDefault(),
-                        Ic_HV = temValue.Where(x => x.datetime.Hour == hourCounter && x.Ic_HV != "").Select(s => s.Ic_HV).FirstOrDefault(),
-                    });
-                    hourCounter += 4;
-                }
-                startDate = startDate.AddDays(1);
-                startDate.AddHours(-24);
-                hourCounter = 0;
-            }
-                var dt = newDataSetMain.OrderBy(p => p.datetime).ToList();
+                var aboveGas = GetAboveGas(newPartData, dataSetMain[i].datetime);
+                var beloveGas = GetBeloveGas(newPartData, dataSetMain[i].datetime);
 
-            for (int i = 0; i < dt.Count; i++)
-            {
-                wtf.WriteByLine(dt[i].ToString().Replace(",", "."));
-                Console.WriteLine(dt[i].ToString());
+                dataSetMain[i].h2 = li.Linear(2, 1, 3, aboveGas.h2, beloveGas.h2).ToString();
+                dataSetMain[i].o2 = li.Linear(2, 1, 3, aboveGas.o2, beloveGas.o2).ToString();
+                dataSetMain[i].ch4 = li.Linear(2, 1, 3, aboveGas.ch4, beloveGas.ch4).ToString();
+                dataSetMain[i].co = li.Linear(2, 1, 3, aboveGas.co, beloveGas.co).ToString();
+                dataSetMain[i].c2h4 = li.Linear(2, 1, 3, aboveGas.c2h4, beloveGas.c2h4).ToString();
+                dataSetMain[i].c2h6 = li.Linear(2, 1, 3, aboveGas.c2h6, beloveGas.c2h6).ToString();
+                dataSetMain[i].c2h2 = li.Linear(2, 1, 3, aboveGas.c2h2, beloveGas.c2h2).ToString();
+                dataSetMain[i].co2 = li.Linear(2, 1, 3, aboveGas.co2, beloveGas.co2).ToString();
+            
+                wtf.WriteByLine(dataSetMain[i].ToString().Replace(",", "."));
+                Console.WriteLine(dataSetMain[i].ToString());
             }
             
             File.Delete(@"d:\work\file.csv");
@@ -78,6 +49,39 @@ namespace Insert_values_between_date
 
             File.Move(@"d:\work\new_file.csv", @"d:\work\file.csv");
         }
+
+        private static GeneralParams GetAboveGas(List<GeneralParams> gas, DateTime correctDate)
+        {
+            var aboveGas = gas.OrderByDescending(x => x.datetime).Where(p => p.datetime.TimeOfDay < correctDate.TimeOfDay && p.datetime.Date == correctDate.Date).FirstOrDefault();
+
+            if (aboveGas == null)
+            {
+                var tempGas = gas.Where(p => p.datetime.Date <= correctDate.Date)
+                    .OrderByDescending(x => x.datetime)
+                    .Take(16).ToList();
+
+                aboveGas = tempGas.Where(p => p.datetime.Date == correctDate.Date.AddDays(-1)).FirstOrDefault();
+            }
+
+            return aboveGas;
+        }
+
+        private static GeneralParams GetBeloveGas(List<GeneralParams> gas, DateTime correctDate)
+        {
+            var belowGas = gas.OrderBy(x => x.datetime).Where(p => p.datetime.TimeOfDay > correctDate.TimeOfDay && p.datetime.Date == correctDate.Date).FirstOrDefault();
+
+            if (belowGas == null)
+            {
+                var tempGas = gas.Where(p => p.datetime.Date >= correctDate.Date)
+                    .OrderBy(x => x.datetime)
+                    .Take(8).ToList();
+
+                belowGas = tempGas.Where(p => p.datetime.Date == correctDate.Date.AddDays(1)).First();
+            }
+
+            return belowGas;
+        }
+
         private static Gases GetBeloveGas(List<Gases> gas, DateTime correctDate)
         {
             var belowGas = gas.OrderBy(x => x.datetime).Where(p => p.datetime.TimeOfDay > correctDate.TimeOfDay && p.datetime.Date == correctDate.Date).FirstOrDefault();

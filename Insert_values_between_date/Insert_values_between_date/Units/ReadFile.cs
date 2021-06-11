@@ -62,8 +62,8 @@ namespace Insert_values_between_date.Units
                         c2h4 = values[5],
                         c2h6 = values[6],
                         c2h2 = values[7],
-                        co2 = values[8],
-                        n2 = values[9],
+                        co2 = values[8]
+                        /*n2 = values[9],
                         t_o_top_mes = values[10],
                         t_o_bot_m = values[11],
                         Pa_HV = values[12],
@@ -71,7 +71,7 @@ namespace Insert_values_between_date.Units
                         Sa_HV = values[14],
                         Ia_HV = values[15],//
                         Ib_HV = values[16],
-                        Ic_HV = values[17]
+                        Ic_HV = values[17]*/
                     });
                 }
 
